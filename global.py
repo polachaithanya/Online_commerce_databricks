@@ -67,6 +67,20 @@ def extract_csv_format(
 
 # COMMAND ----------
 
+#to read the files incrementally
+# spark.readStream
+    #          .format("cloudFiles")
+    #          .option("cloudFiles.format", "csv")
+    #          .option("header", "false")
+    #          .option("delimiter", delimiter)
+    #          .option("escape", escape)
+    #          .option("lineSep", newline)
+    #          .schema(schema)
+    #          .load(csv_path)
+    # )
+
+# COMMAND ----------
+
 def read_cdm_csv(
     csv_path: str,
     schema: StructType,
@@ -96,7 +110,37 @@ def read_cdm_csv(
              .option("lineSep", newline)
              .schema(schema)
              .csv(csv_path)
+
+    #          
     )
 
     return df
+
+
+# COMMAND ----------
+
+# Paths
+cdm_path = "/Volumes/onlinecommerce/landing/purchase_volume/Parties.cdm.json"
+manifest_path = "/Volumes/onlinecommerce/landing/purchase_volume/Purchase.manifest.cdm.json"
+csv_path = "/Volumes/onlinecommerce/landing/purchase_volume/Parties/*.csv"
+
+# Build schema
+schema = read_cdm_schema(cdm_path)
+
+# Extract CSV format
+delimiter, escape, newline = extract_csv_format(
+    manifest_path,
+    "Parties"
+)
+
+# Read CSV
+df = read_cdm_csv(
+    csv_path,
+    schema,
+    delimiter,
+    escape,
+    newline
+)
+
+df.display()
 
