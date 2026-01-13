@@ -30,4 +30,4 @@ df.display()
 
 # COMMAND ----------
 
-df.withColumn("injested_timestamp",current_timestamp()).toTable("onlinecommerce.bronze")
+df.withColumn("injested_timestamp",current_timestamp()).toTable("onlinecommerce.bronze.Parties")

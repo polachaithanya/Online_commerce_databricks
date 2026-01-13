@@ -3,7 +3,7 @@
 
 # COMMAND ----------
 
-# MAGIC %fs ls '/Volumes/onlinecommerce/landing/purchase_volume/PartyAddress/'
+# MAGIC %fs ls '/Volumes/onlinecommerce/landing/purchase_volume/'
 
 # COMMAND ----------
 
@@ -14,9 +14,9 @@
 # COMMAND ----------
 
 # Paths
-cdm_path = "/Volumes/onlinecommerce/landing/purchase_volume/PartyAddress.cdm.json"
+cdm_path = "/Volumes/onlinecommerce/landing/purchase_volume/VendTable.cdm.json"
 manifest_path = "/Volumes/onlinecommerce/landing/purchase_volume/Purchase.manifest.cdm.json"
-csv_path = "/Volumes/onlinecommerce/landing/purchase_volume/PartyAddress/*.csv"
+csv_path = "/Volumes/onlinecommerce/landing/purchase_volume/VendTable/*.csv"
 
 
 # Build schema
@@ -25,7 +25,7 @@ schema = read_cdm_schema(cdm_path)
 # Extract CSV format
 delimiter, escape, newline = extract_csv_format(
     manifest_path,
-    "PartyAddress"
+    "VendTable"
 )
 
 # Read CSV
@@ -41,4 +41,4 @@ df.display()
 
 # COMMAND ----------
 
-df.withColumn("injested_timestamp",current_timestamp()).toTable("onlinecommerce.bronze.PartyAddress")
+df.withColumn("injested_timestamp",current_timestamp()).toTable("onlinecommerce.bronze.vendtable")
