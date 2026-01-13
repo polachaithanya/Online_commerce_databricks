@@ -47,7 +47,7 @@ schema = StructType([
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## Readinf Manifest File
+# MAGIC ## Reading Manifest File
 
 # COMMAND ----------
 
