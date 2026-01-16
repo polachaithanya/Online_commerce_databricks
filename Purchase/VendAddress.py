@@ -3,10 +3,6 @@
 
 # COMMAND ----------
 
-# MAGIC %fs ls '/Volumes/onlinecommerce/landing/purchase_volume/'
-
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC - if we need to read the file incrementally use below path
 # MAGIC - csv_path = "/Volumes/onlinecommerce/landing/purchase_volume/PartyAddress"
@@ -37,7 +33,8 @@ df = read_cdm_csv(
     newline
 )
 
-df.display()
+from pyspark.sql.functions import current_timestamp
+df.withColumn("injested_timestamp",current_timestamp()).write.saveAsTable("onlinecommerce.bronze.venditems")
 
 # COMMAND ----------
 

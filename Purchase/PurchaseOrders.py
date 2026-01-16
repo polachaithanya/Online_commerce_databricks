@@ -3,16 +3,13 @@
 
 # COMMAND ----------
 
-# MAGIC %fs ls '/Volumes/onlinecommerce/landing/purchase_volume/'
-
-# COMMAND ----------
-
 # MAGIC %md
 # MAGIC - if we need to read the file incrementally use below path
 # MAGIC - csv_path = "/Volumes/onlinecommerce/landing/purchase_volume/PartyAddress"
 
 # COMMAND ----------
 
+from pyspark.sql.functions import current_timestamp
 # Paths
 cdm_path = "/Volumes/onlinecommerce/landing/purchase_volume/PurchaseOrder.cdm.json"
 manifest_path = "/Volumes/onlinecommerce/landing/purchase_volume/Purchase.manifest.cdm.json"
@@ -37,8 +34,5 @@ df = read_cdm_csv(
     newline
 )
 
-df.display()
 
-# COMMAND ----------
-
-df.withColumn("injested_timestamp",current_timestamp()).toTable("onlinecommerce.bronze.PurchaseOrder")
+df.withColumn("injested_timestamp",current_timestamp()).write.saveAsTable("onlinecommerce.bronze.purchaseorders")

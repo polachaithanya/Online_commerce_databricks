@@ -30,4 +30,5 @@ df.display()
 
 # COMMAND ----------
 
-df.withColumn("injested_timestamp",current_timestamp()).toTable("onlinecommerce.bronze.Parties")
+from pyspark.sql.functions import current_timestamp
+df.withColumn("injested_timestamp",current_timestamp()).write.saveAsTable("onlinecommerce.bronze.parties")
