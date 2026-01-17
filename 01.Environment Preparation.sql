@@ -19,6 +19,13 @@ COMMENT 'Catalog for OnlineCommerce'
 
 -- COMMAND ----------
 
+  USE CATALOG onlineCommerce;
+  CREATE SCHEMA IF NOT EXISTS silver
+  MANAGED LOCATION 'abfss://onlinecommerce@adbstoreage.dfs.core.windows.net/operations/unityCatalog/silver/'
+  COMMENT 'silver layer data managed here'
+
+-- COMMAND ----------
+
 drop catalog onlineCommerce
 
 -- COMMAND ----------
