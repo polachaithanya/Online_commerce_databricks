@@ -49,12 +49,20 @@ LOCATION 'abfss://onlinecommerce@adbstoreage.dfs.core.windows.net/landing/tables
 
 -- COMMAND ----------
 
+USE CATALOG onlineCommerce;
+use schema landing;
+
+CREATE EXTERNAL VOLUME IF NOT EXISTS others_volume
+LOCATION 'abfss://onlinecommerce@adbstoreage.dfs.core.windows.net/landing/tables/others/'
+
+-- COMMAND ----------
+
 DESCRIBE VOLUME onlinecommerce.landing_one.purchase_volume;
 
 
 -- COMMAND ----------
 
--- MAGIC %fs ls '/Volumes/onlinecommerce/landing/purchase_volume'
+-- MAGIC %fs ls '/Volumes/onlinecommerce/landing/others_volume'
 
 -- COMMAND ----------
 
